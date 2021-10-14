@@ -5,15 +5,16 @@ const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
 const mongoose=require("mongoose");
 const _=require("lodash");
-
+const dotenv=require('dotenv');
 const app = express();
-
+dotenv.config();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect('mongodb+srv://admin-dhaval:incorrect4u@cluster0.rsmac.mongodb.net/todolistDB', {useNewUrlParser: true, useUnifiedTopology: true});
+var url = process.env.MONGOLAB_URI;
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // -------------------------------------------------------
 const itemSchema={
